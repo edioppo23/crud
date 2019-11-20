@@ -1,33 +1,29 @@
-const express = require("express")
+const express = require('express')
 const router = express.Router()
-const bukumodel = require("../models/buku.model")
+const daratModel = require("../models/darat")
 
-
-router.post("/create", async (req, res) => {
-    let { id_buku, judul, penulis, thn_terbit,
-        penerbit } = req.body
-    let input_data = {
-        id_buku, judul, penulis, thn_terbit,
-        penerbit
+router.post('/create', (req, res) => {
+    let { nama_hewan, makanan, karakteristik } = req.body
+    let insert_data = {
+        nama_hewan, makanan, karakteristik
     }
 
-    let data = new bukumodel(input_data)
+    let data = new daratModel(insert_data)
     data.save()
-
     return res.send({
-        status: "Sukses",
+        status: "Succes",
         data,
-        message: "Data buku berhasil dimasukkan"
+        message: " Darat berhasil dimasukkan"
     })
 
 })
 
 router.get("/", (req, res) => {
-    return res.send("Hello World sekarang ada diposisi buku routers")
+    return res.send("Hello World sekarang ada diposisi darat routers")
 })
 
 router.get("/getAll", async (req, res) => {
-    let result = await bukumodel.find({}).exec()
+    let result = await daratModel.find({}).exec()
 
     res.send({
         status: "Succes ",
@@ -39,7 +35,7 @@ router.get("/getAll", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     let { id } = req.params
-    let data = await bukumodel.findOne({ _id: id }).exec()
+    let data = await daratmodel.findOne({ _id: id }).exec()
     return res.send({
         status: "Succes",
         datas,
@@ -51,14 +47,14 @@ router.get("/:id", async (req, res) => {
 // membuat update
 router.put('/:id', async (req, res) => {
     let { id } = req.params
-    let { id_buku, judul, penulis, thn_terbit, penerbit } = req.body
+    let { nama_hewan, makanan, karakteristik } = req.body
 
     let update_data = {
-        id_buku, judul, penulis, thn_terbit, penerbit
+        nama_hewan, makanan, karakteristik
     }
 
     try {
-        let data = await bukumodel.findByIdAndUpdate(id, update_data)
+        let data = await daratmodel.findByIdAndUpdate(id, update_data)
 
         return res.status(200).json({
             status: "Succes",
@@ -78,7 +74,7 @@ router.put('/:id', async (req, res) => {
 // Membuat Delete
 router.delete('/:id', async (req, res) => {
     let { id } = req.params
-    let query = await bukumodel.findByIdAndDelete({ _id: id }).exec()
+    let query = await daratModel.findByIdAndDelete({ _id: id }).exec()
 
     return res.status(200).json({
         status: "Delete Berhasil",
@@ -88,3 +84,8 @@ router.delete('/:id', async (req, res) => {
 })
 
 module.exports = router
+
+
+
+
+

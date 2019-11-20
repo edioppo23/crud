@@ -4,7 +4,9 @@ require("./servers/db") // database connection
 
 // Import routes files
 const index_routes = require("./routes/index")
-const book_routes = require("./routes/buku.routes")
+const darat_routes = require("./routes/darat.routes")
+const amfibi_routes = require("./routes/amfibi.routes")
+const buah_routes = require("./routes/buah.routes")
 
 // for parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
@@ -15,7 +17,9 @@ app.get('/', (req, res) => {
 
 //Set routes imported
 app.use("/index", index_routes)
-app.use("/book", book_routes)
+app.use("/amfibi", amfibi_routes)
+app.use("/darat", darat_routes)
+app.use("/buah", buah_routes)
 
 app.listen(3300, () => {
     console.log(`Example app listening on port 3300`)
