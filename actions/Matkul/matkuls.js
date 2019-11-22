@@ -1,11 +1,11 @@
 const Matkul = require('../../models/matkul');
 
 const buat = async (req) => {
-    let { nomatkul, namamatkul, dosen, semester } = req.body
+    let { nomatkul, namamatkul, dosen, semester, id_dosen } = req.body
     nomatkul = parseInt(nomatkul)
 
     let masukkan_data = {
-        nomatkul, namamatkul, dosen, semester
+        nomatkul, namamatkul, dosen, semester, id_dosen
     }
 
     let data = new Matkul(masukkan_data)

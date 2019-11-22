@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { create, getAll, getDetail, update, destroy } = require("../actions/Mahasiswa/mahasiswas");
 
+
+// 1. Membuat data =======================================
 router.post("/create", async (req, res) => {
     try {
         let data = await create(req)
@@ -19,7 +21,10 @@ router.post("/create", async (req, res) => {
     }
 });
 
-router.get("/", async (req, res) => {
+
+// 2. Menampilkan data ==================================
+
+router.get("/getAll", async (req, res) => {
     try {
         let data = await getAll()
 
@@ -35,6 +40,8 @@ router.get("/", async (req, res) => {
         })
     }
 });
+
+// 3. Menampilkan salah satu data berdasarkan id =======================
 
 router.get("/:id", async (req, res) => {
     try {
@@ -53,6 +60,8 @@ router.get("/:id", async (req, res) => {
         })
     }
 });
+
+// 4. Merubah data ====================================
 
 router.put("/:id", async (req, res) => {
     let { id } = req.params
@@ -79,6 +88,9 @@ router.put("/:id", async (req, res) => {
         })
     }
 });
+
+
+// 5. Menghapus data ============================================
 
 router.delete("/:id", async (req, res) => {
     let { id } = req.params

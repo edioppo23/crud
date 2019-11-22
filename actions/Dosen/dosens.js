@@ -1,15 +1,15 @@
 const Dosen = require("../../models/dosen");
-const Matkul = ruquire("../../models/matkul")
+const Matkul = require("../../models/matkul")
 
 
 
 
 const buat = async (req) => {
-    let { nik, nama, email, tlp, matkul } = req.body
+    let { nik, nama, email, tlp, matkul, id_matkul } = req.body
     tlp = parseInt(tlp)
 
     var insert_data = {
-        nik, nama, email, tlp, matkul
+        nik, nama, email, tlp, matkul, id_matkul
     }
 
     let data = new Dosen(insert_data)
@@ -44,7 +44,7 @@ const semua = async () => {
         //     }            
         // })
 
-        return data
+        return query
     } catch (err) {
         throw err
     }

@@ -5,7 +5,8 @@ let matkulSchema = new Schema({
     nomatkul: Number,
     namamatkul: String,
     dosen: String,
-    semester: String
+    semester: String,
+    id_dosen: String
 
 })
 
