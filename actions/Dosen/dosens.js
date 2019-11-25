@@ -1,15 +1,29 @@
 const Dosen = require("../../models/dosen");
-const Matkul = require("../../models/matkul")
+const Matkul = require("../../models/matkul");
+const Mahasiswa = require("../../models/mahasiswa");
 
 
-
-
+// 1. Membuat database baru ==============
 const buat = async (req) => {
-    let { nik, nama, email, tlp, matkul, id_matkul } = req.body
+    let {
+        nik,
+        nama,
+        email,
+        tlp,
+        matkul,
+        relasi,
+        relasi1
+    } = req.body
     tlp = parseInt(tlp)
 
     var insert_data = {
-        nik, nama, email, tlp, matkul, id_matkul
+        nik,
+        nama,
+        email,
+        tlp,
+        matkul,
+        relasi,
+        relasi1
     }
 
     let data = new Dosen(insert_data)
@@ -24,13 +38,16 @@ const buat = async (req) => {
 }
 
 
-// Menampilkan semua data get ==============================
+// 2. Menampilkan semua data get ==============================
 const semua = async () => {
     try {
-        let query = await Dosen.find({}).populate([
-            {
-                path: 'id_matkul',
+        let query = await Dosen.find({}).populate([{
+                path: 'relasi',
                 model: Matkul
+            },
+            {
+                path: 'relasi1',
+                model: Mahasiswa
             }
         ]).exec()
 
@@ -51,7 +68,7 @@ const semua = async () => {
 }
 
 
-// Menampilkan salah satu data ============================================
+// 3.  Menampilkan salah satu data ============================================
 const detail = async (id) => {
     try {
         let query = await Dosen.findOne({
@@ -66,12 +83,26 @@ const detail = async (id) => {
 
 
 
-// Update data ===================================
+// 4. Update data ===================================
 
 const ubah = async (id, update_data) => {
-    let { nik, nama, email, tlp, matkul } = update_data
+    let {
+        nik,
+        nama,
+        email,
+        tlp,
+        matkul,
+        relasi
+    } = update_data
 
-    let data = { nik, nama, email, tlp, matkul }
+    let data = {
+        nik,
+        nama,
+        email,
+        tlp,
+        matkul,
+        relasi
+    }
 
     try {
         let query = await Dosen.findOneAndUpdate({
@@ -85,7 +116,7 @@ const ubah = async (id, update_data) => {
 };
 
 
-// Membuat Hapus data ================================
+// 5. Menghapus data ================================
 
 const hapus = async (id) => {
     try {
@@ -100,31 +131,10 @@ const hapus = async (id) => {
 }
 
 
-module.exports = { buat, detail, semua, ubah, hapus }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports = {
+    buat,
+    detail,
+    semua,
+    ubah,
+    hapus
+}

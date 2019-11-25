@@ -7,8 +7,9 @@ let dosenSchema = new Schema({
     email: String,
     tlp: Number,
     matkul: String,
-    id_matkul: String
-});
+    relasi: String,
+    relasi1: String
+})
 
 let Dosen = mongoose.model("Dosen", dosenSchema);
 module.exports = Dosen

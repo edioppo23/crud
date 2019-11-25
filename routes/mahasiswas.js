@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { create, getAll, getDetail, update, destroy } = require("../actions/Mahasiswa/mahasiswas");
+const {
+    create,
+    getAll,
+    getDetail,
+    update,
+    destroy
+} = require("../actions/Mahasiswa/mahasiswas");
 
 
 // 1. Membuat data =======================================
@@ -13,6 +19,7 @@ router.post("/create", async (req, res) => {
             data,
             message: "Data mahasiswa berhasil dibuat !"
         })
+
     } catch (err) {
         return res.status(400), json({
             status: "Error",
@@ -26,13 +33,14 @@ router.post("/create", async (req, res) => {
 
 router.get("/getAll", async (req, res) => {
     try {
-        let data = await getAll()
+        let data = await getAll(req)
 
         return res.send({
             status: "Sukses",
             data,
             message: "Semua Data mahasiswa"
         })
+
     } catch (err) {
         return res.status(400).json({
             status: "Error",
@@ -41,11 +49,14 @@ router.get("/getAll", async (req, res) => {
     }
 });
 
+
 // 3. Menampilkan salah satu data berdasarkan id =======================
 
 router.get("/:id", async (req, res) => {
     try {
-        let { id } = req.params
+        let {
+            id
+        } = req.params
         let data = await getDetail(id)
 
         return res.status(200).json({
@@ -53,6 +64,7 @@ router.get("/:id", async (req, res) => {
             data,
             message: "Data Mahasiswa berhasil Tampil"
         })
+
     } catch (err) {
         return res.status(400).json({
             status: "Error",
@@ -64,7 +76,9 @@ router.get("/:id", async (req, res) => {
 // 4. Merubah data ====================================
 
 router.put("/:id", async (req, res) => {
-    let { id } = req.params
+    let {
+        id
+    } = req.params
     let updated_data = {
         npm: req.body.npm,
         nama: req.body.nama,
@@ -81,9 +95,10 @@ router.put("/:id", async (req, res) => {
             data,
             message: "Data Mahasiswa berhasil di update !"
         })
+
     } catch (err) {
         return res.status(400).json({
-            status: "Error Bos Hahaha",
+            status: "Error Bos ",
             message: err.message
         })
     }
@@ -93,7 +108,9 @@ router.put("/:id", async (req, res) => {
 // 5. Menghapus data ============================================
 
 router.delete("/:id", async (req, res) => {
-    let { id } = req.params
+    let {
+        id
+    } = req.params
 
     try {
         let data = await destroy(id)
@@ -103,6 +120,7 @@ router.delete("/:id", async (req, res) => {
             data,
             message: "Data mahasisea berhasil dihapus!"
         })
+
     } catch (err) {
         return res.status(400).json({
             status: "Error",

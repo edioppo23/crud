@@ -6,7 +6,7 @@ let matkulSchema = new Schema({
     namamatkul: String,
     dosen: String,
     semester: String,
-    id_dosen: String
+    relasi: String
 
 })
 
