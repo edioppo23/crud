@@ -1,6 +1,6 @@
 const ResetPassword = require("../../models/reset_password_model")
-const ShowPassword = require("./show_action")
-const bcrypt = require("bcrypt")
+const ShowPassword = require("./show_password_action")
+const bcrypt = require("bcryptjs")
 const User = require("../../models/user.model")
 
 class Reset {

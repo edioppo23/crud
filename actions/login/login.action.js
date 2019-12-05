@@ -1,5 +1,7 @@
-const User = require("../models/users.models")
+const User = require("../../models/user.model")
+const Role = require("../../models/role.models")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 
 class Login {
     constructor(req) {
@@ -12,6 +14,8 @@ class Login {
         try {
             let data = await User.find({
                 email: this.email
+            }).populate({
+                path: 'role_id', model: Role
             }).exec()
 
             if (data.length == 0) {
@@ -33,10 +37,25 @@ class Login {
                 //
             }
 
+            let payload = {
+                user_id: data[0]._id,
+                user_name: data[0].name,
+                user_email: data[0].email,
+                user_gender: data[0].gender,
+                user_phone: data[0].phone,
+                user_role_id: data[0].role_id[0]
+            };
+
+            let token = jwt.sign(payload, process.env.JWT_SCRET, {
+                expiredIn: 86400 // expires in 24 hours 
+            });
+
             return {
+                user: payload,
+                token,
                 data,
                 expire_in: "24 hours"
-            }
+            };
 
         } catch (err) {
             throw err

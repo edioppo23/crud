@@ -1,6 +1,6 @@
-const express = require("express")
+const express = require('express')
 const router = express.Router()
-const login = require("../actions/login")
+const login = require("../actions/login/login.action")
 
 router.post("/", async (reg, res) => {
     try {

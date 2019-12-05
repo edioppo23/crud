@@ -41,8 +41,13 @@ let userSchema = new Schema({
     deleted_at: {
         type: Date,
         default: null
+    },
+    role_id: {
+        type: String,
+        default: null
     }
 })
+
 
 let User = mongoose.model("User", userSchema)
 module.exports = User

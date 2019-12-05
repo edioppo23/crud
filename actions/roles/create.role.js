@@ -3,7 +3,7 @@ const Role = require("../../models/role.models");
 class CreateRole {
     constructor(req) {
         (this.name = req.body.name),
-            (this.permissions = req.body.permission);
+            (this.permissions = req.body.permissions);
     }
 
     async exec() {
