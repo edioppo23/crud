@@ -53,7 +53,7 @@ router.post(
             return res.send({
                 code: 201,
                 status: "success",
-                message: "Register successfully",
+                message: "Register Berhasil dibuat",
                 data
             })
         } catch (err) {
